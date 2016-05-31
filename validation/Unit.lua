@@ -39,6 +39,16 @@ end
 --- A validator that warns if a category is specified more than once.
 CategoryDuplication = function(bp, Error, Warning)
     local cats = bp['Categories']
+
+    table.sort(cats)
+
+    local lastCat = ""
+    -- Duplicates will now always be adjacent.
+    for _, cat in pairs(cats) do
+        if cat == lastCat then
+            Warning("Duplicated category: " .. cat)
+        end
+    end
 end
 
 
