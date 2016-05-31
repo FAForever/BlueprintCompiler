@@ -12,8 +12,8 @@ function ValidationEngine.Validate(bp, source, validators)
     end
 
     local function Warning(s)
+        print("\nWarning in " .. source ..":")
         print(s)
-
     end
 
 
