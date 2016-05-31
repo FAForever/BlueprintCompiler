@@ -2,8 +2,20 @@
 --
 -- Utility functions for working with this type of set.
 
+local SetUtils = {}
+
+function SetUtils.FromList(l)
+    local set = {}
+
+    for _, e in l do
+        set[e] = true
+    end
+
+    return set
+end
+
 --- Returns a ∪ b as a new set
-function Union(a, b)
+function SetUtils.Union(a, b)
     local u = {}
 
     table.print(a)
@@ -21,7 +33,7 @@ function Union(a, b)
 end
 
 --- Replaces a with a ∪ b
-function DestructiveUnion(a, b)
+function SetUtils.DestructiveUnion(a, b)
     for k, v in b do
         a[k] = v or nil
     end
@@ -30,7 +42,7 @@ function DestructiveUnion(a, b)
 end
 
 --- Returns a ∩ b as a new set
-function Intersection(a, b)
+function SetUtils.Intersection(a, b)
     local i = {}
 
     for k, v in a do
@@ -49,7 +61,7 @@ function Intersection(a, b)
 end
 
 --- Returns a \ b as a new set
-function Subtract(a, b)
+function SetUtils.Subtract(a, b)
     local s = {}
 
     for k, v in a do
@@ -62,7 +74,7 @@ function Subtract(a, b)
 end
 
 --- Returns the set S = {a ∈ A.p(a)}
-function PredicateFilter(A, p)
+function SetUtils.PredicateFilter(A, p)
     local s = {}
 
     for k, v in A do
@@ -75,7 +87,7 @@ function PredicateFilter(A, p)
 end
 
 --- Returns true iff A is the empty set
-function Empty(A)
+function SetUtils.Empty(A)
     for k, v in A do
         if v then
             return false
@@ -83,3 +95,5 @@ function Empty(A)
     end
     return true
 end
+
+return SetUtils
